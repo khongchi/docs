@@ -69,31 +69,31 @@ Next, we'll create our `users.blade.php` view: 다음으로 users.blade.php view
 		Users!
 	@stop
 
-Some of this syntax probably looks quite strange to you. 아마도 이 문법이 아주 낯설것이다. That's because we're using Laravel's templating system: Blade. 우리가 라라벨의 templating syste인 블레이드를 사용하기 때문이다. Blade is very fast, because it is simply a handful of regular expressions that are run against your templates to compile them to pure PHP. 블레이드는 PHP만으로 컴파일되는것에비해 간단학게 정규표현식들을 매우 빠르다. Blade provides powerful functionality like template inheritance, as well as some syntax sugar on typical PHP control structures such as `if` and `for`. Check out the [Blade documentation](/docs/templates) for more details.
+Some of this syntax probably looks quite strange to you. 아마도 이 문법이 아주 낯설것이다. That's because we're using Laravel's templating system: Blade. 우리가 라라벨의 templating syste인 블레이드를 사용하기 때문이다. Blade is very fast, because it is simply a handful of regular expressions that are run against your templates to compile them to pure PHP. 블레이드는 순순한 PHP 검파일에비해 간단하게 정규표현을 사용하는것이므로 매우 빠르다. Blade provides powerful functionality like template inheritance, as well as some syntax sugar on typical PHP control structures such as `if` and `for`.블레이드는 `if`와 `for`와 같은 전형적인 PHP 제어구조뿐 아니라 템플릿의 상속같은 강력한 기능을 제공한다. Check out the [Blade documentation](/docs/templates) for more details.자세한 내용은 [Blade documentation](/docs/templates)를 확인하라.
 
-Now that we have our views, let's return it from our `/users` route. Instead of returning `Users!` from the route, return the view instead:
+Now that we have our views, let's return it from our `/users` route. Instead of returning `Users!` from the route, return the view instead: 보기를 보자. `/users`라우트로 가면 문자열`users!`를 돌려주는 대신에 view를 줍니다.
 
 	Route::get('users', function()
 	{
 		return View::make('users');
 	});
 
-Wonderful! Now you have setup a simple view that extends a layout. Next, let's start working on our database layer.
+Wonderful! Now you have setup a simple view that extends a layout.대단해! 지금 당신은 레이아웃을 확장해서 간단한 뷰를 설정했다. Next, let's start working on our database layer. 다음으로 데이터베이스 레이어 작업을 해보자.  
 
 <a name="creating-a-migration"></a>
 ## Creating A Migration
 
-To create a table to hold our data, we'll use the Laravel migration system. Migrations let you expressively define modifications to your database, and easily share them with the rest of your team.
+To create a table to hold our data, we'll use the Laravel migration system. 데이터를 저장하려는 테이브를 만들기위해 우리는 라라벨 마이그레이션 시스템을 사용할것이다. Migrations let you expressively define modifications to your database, and easily share them with the rest of your team. 마이그레이션은 데이터베이스 수정 사항들을 정의해서 다른팀원들과 쉽게 그 내용을 공유할 수 있게 해준다.
 
-First, let's configure a database connection. You may configure all of your database connections from the `app/config/database.php` file. By default, Laravel is configured to use MySQL, and you will need to supply connection credentials within the database configuration file. If you wish, you may change the `driver` option to `sqlite` and it will use the SQLite database included in the `app/database` directory.
+First, let's configure a database connection. 먼저 데이터베이스 커넥션을 설정하자. You may configure all of your database connections from the `app/config/database.php` file. `app/config/database.php`파일에서 모든 데이터베이스 커넥션 설정을 할 수 있다. By default, Laravel is configured to use MySQL, and you will need to supply connection credentials within the database configuration file. 라라벨은 기본적으로 MySQL을 사용하도록 설정되어있는데 데이터베이스 설정 파일에서 연결 정보를 제공해야 합니다.  If you wish, you may change the `driver` option to `sqlite` and it will use the SQLite database included in the `app/database` directory. 바란다면 `driver`를 `sqlite`로 변경해서 `app/database`디렉토리에 있는 SQLite 데이터베이스를 사용할 수 있을것이다.
 
-Next, to create the migration, we'll use the [Artisan CLI](/docs/artisan). From the root of your project, run the following from your terminal:
+Next, to create the migration, we'll use the [Artisan CLI](/docs/artisan). 다음으로 마이그레이션을 만들기위해  [Artisan CLI](/docs/artisan)을 사용할것이다. From the root of your project, run the following from your terminal: 프로젝트 루트 터미널에서 다음을 실행해라.
 
 	php artisan migrate:make create_users_table
 
-Next, find the generated migration file in the `app/database/migrations` folder. This file contains a class with two methods: `up` and `down`. In the `up` method, you should make the desired changes to your database tables, and in the `down` method you simply reverse them.
+Next, find the generated migration file in the `app/database/migrations` folder.다음으로 `app/database/migrations`폴더에서 생성된 마이그레이션 파일을 찾아라. This file contains a class with two methods: `up` and `down`. 이 파일은 `up`과 `down`이라는 두개의 메소드를 가진 클래스가 있다. In the `up` method, you should make the desired changes to your database tables, and in the `down` method you simply reverse them. `up`메소드로 데이터베이스 테이블들을 의도한데로 수정할 수 있고 `down`메소드로 쉽게 수정한것들을 되돌릴 수 있다. 
 
-Let's define a migration that looks like this:
+Let's define a migration that looks like this: 다음과같이 마이그레이션을 정의해보자.
 
 	public function up()
 	{
@@ -111,26 +111,26 @@ Let's define a migration that looks like this:
 		Schema::drop('users');
 	}
 
-Next, we can run our migrations from our terminal using the `migrate` command. Simply execute this command from the root of your project:
+Next, we can run our migrations from our terminal using the `migrate` command. 다음으로 터미널에서 `migrate`명령어를 사용해서 마이그레이션을 실행할 수 있다. Simply execute this command from the root of your project: 프로젝트 루트에서 다음과같은 명령어로 간단히 실행할 수 있다.
 
 	php artisan migrate
 
-If you wish to rollback a migration, you may issue the `migrate:rollback` command. Now that we have a database table, let's start pulling some data!
+If you wish to rollback a migration, you may issue the `migrate:rollback` command. 마이그레이션을 롤백하고싶다면 `migrate:rollback`명령어를 사용하자.  Now that we have a database table, let's start pulling some data! 지금 데이터베이스 테이블이 생겼다. 이제 데이터를 넣어보자!
 
 <a name="eloquent-orm"></a>
 ## Eloquent ORM
 
-Laravel ships with a superb ORM: Eloquent. If you have used the Ruby on Rails framework, you will find Eloquent familiar, as it follows the ActiveRecord ORM style of database interaction.
+Laravel ships with a superb ORM: Eloquent.라라벨은 엘로퀀트라는 훌륭한 ORM을 가지고 있다. If you have used the Ruby on Rails framework, you will find Eloquent familiar, as it follows the ActiveRecord ORM style of database interaction.루비온레일즈를 사용한적이 있다면 엘로퀀트가 친숙할텐데 액티브레코드 ORM 스타일을 따르고 있기 때문이다.
 
-First, let's define a model. An Eloquent model can be used to query an associated database table, as well as represent a given row within that table. Don't worry, it will all make sense soon! Models are typically stored in the `app/models` directory. Let's define a `User.php` model in that directory like so:
+First, let's define a model. 먼저 모델을 정의한다. An Eloquent model can be used to query an associated database table, as well as represent a given row within that table. 엘로퀀트 모델은 지정된 테이블 행뿐만 아니라 연관된 데이터베이스 테이블에 쿼리를 사용할 수 있다.  Don't worry, it will all make sense soon! 걱정하지마라 곧 이해가 될거다. Models are typically stored in the `app/models` directory. 모델들은 보통 `app/models`디렉토리에 저장된다. Let's define a `User.php` model in that directory like so: 그 디렉토리에 다음과 같이 `user.php`모델을 정의하자:
 
 	class User extends Eloquent {}
 
-Note that we do not have to tell Eloquent which table to use. Eloquent has a variety of conventions, one of which is to use the plural form of the model name as the model's database table. Convenient!
+Note that we do not have to tell Eloquent which table to use. 엘로퀀트에 어떤테이블을 사용할지 알릴필요가 없다는것에 주목하자. Eloquent has a variety of conventions, one of which is to use the plural form of the model name as the model's database table. Convenient!엘로퀀트는 다양한 규약이 있고 그중에 하나는 모델의 데이터베이스 테이블 이름으로 복수형을 사용한다는것이다. 편리하게도!
 
-Using your preferred database administration tool, insert a few rows into your `users` table, and we'll use Eloquent to retrieve them and pass them to our view.
+Using your preferred database administration tool, insert a few rows into your `users` table, and we'll use Eloquent to retrieve them and pass them to our view.선호하는 데이터베이스 관리도구로 `users`테이블에 몇개행을 넣고 엘로퀀트를 사용해서 다시 호출하여 뷰로 보내보자.
 
-Now let's modify our `/users` route to look like this:
+Now let's modify our `/users` route to look like this: `/user`라우트를 다음과같이 수정해보자.:
 
 	Route::get('users', function()
 	{
@@ -139,14 +139,14 @@ Now let's modify our `/users` route to look like this:
 		return View::make('users')->with('users', $users);
 	});
 
-Let's walk through this route. First, the `all` method on the `User` model will retrieve all of the rows in the `users` table. Next, we're passing these records to the view via the `with` method. The `with` method accepts a key and a value, and is used to make a piece of data available to a view.
+Let's walk through this route. 이 라우트로 실행해보자. First, the `all` method on the `User` model will retrieve all of the rows in the `users` table. 먼저  `user`모델에서 `all`메소드는 `user`데이블에 모든 행들을 가져온다. Next, we're passing these records to the view via the `with` method. 다음으로 이 레코드들을 `with`메소드로 뷰로 보낸다. The `with` method accepts a key and a value, and is used to make a piece of data available to a view. `with`메소드는 뷰에서 사용할 수 있는 키와 값을 받아들인다. 
 
-Awesome. Now we're ready to display the users in our view!
+Awesome. Now we're ready to display the users in our view! 대단해. 뷰에 사용자들을 보일 준비가 됐다.
 
 <a name="displaying-data"></a>
 ## Displaying Data
 
-Now that we have made the `users` available to our view. We can display them like so:
+Now that we have made the `users` available to our view. 뷰에서 사용할 수 있는 `user`를 만들었다.  We can display them like so: 다음과같이 보여줄 수 있다.
 
 	@extends('layout')
 
@@ -156,6 +156,6 @@ Now that we have made the `users` available to our view. We can display them lik
 		@endforeach
 	@stop
 
-You may be wondering where to find our `echo` statements. When using Blade, you may echo data by surrounding it with double curly braces. It's a cinch. Now, you should be able to hit the `/users` route and see the names of your users displayed in the response.
+You may be wondering where to find our `echo` statements. `echo`문장으로는 이상해보일것이다. When using Blade, you may echo data by surrounding it with double curly braces. 블레이드를 사용할때 이중괄호로 감싸서 데이터들을 echo 처럼 보여줄 수 있다.  It's a cinch. 식은죽먹기다. Now, you should be able to hit the `/users` route and see the names of your users displayed in the response. `/users`라우트를 통해서 사용자의 이름을 보여줄 수 있다. 
 
-This is just the beginning. In this tutorial, you've seen the very basics of Laravel, but there are so many more exciting things to learn. Keep reading through the documentation and dig deeper into the powerful features available to you in [Eloquent](/docs/eloquent) and [Blade](/docs/templates). Or, maybe you're more interested in [Queues](/docs/queues) and [Unit Testing](/docs/testing). Then again, maybe you want to flex your architecture muscles with the [IoC Container](/docs/ioc). The choice is yours!
+This is just the beginning. 이것은 시작에 불과하다. In this tutorial, you've seen the very basics of Laravel, but there are so many more exciting things to learn. 이 튜토리얼에서 라라벨의 아주 기본적이지만 훨씬 재미있는 배울것들이 있다. Keep reading through the documentation and dig deeper into the powerful features available to you in [Eloquent](/docs/eloquent) and [Blade](/docs/templates). 이 문서드를 읽고 [Eloquent](/docs/eloquent) 와 [Blade](/docs/templates)의 강력한 기능들을 더깊게 체험해봐라. Or, maybe you're more interested in [Queues](/docs/queues) and [Unit Testing](/docs/testing). 혹은  [Queues](/docs/queues) 와 [Unit Testing](/docs/testing)가 더 흥미로울수도 있다. Then again, maybe you want to flex your architecture muscles with the [IoC Container](/docs/ioc).  [IoC Container](/docs/ioc)로 유연한 아키텍저를 원할지도 모른다. The choice is yours!선택은 당신의 몫이다!
