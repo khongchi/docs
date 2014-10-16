@@ -16,13 +16,21 @@ The cache configuration file also contains various other options, which are docu
 <a name="cache-usage"></a>
 ## Cache Usage 캐시의 사용
 
-**Storing An Item In The Cache 캐시에 하나의 항목을 저장하기**
+#### Storing An Item In The Cache 캐시에 하나의 항목을 저장하기
 
      Cache::put('key', 'value', $minutes);
+
+#### Using Carbon Objects To Set Expire Time Carbon 객체를 사용하여 만료시간 설정하기 
+
+	$expiresAt = Carbon::now()->addMinutes(10);
+
+	Cache::put('key', 'value', $expiresAt);
 
 **Storing An Item In The Cache If It Doesn't Exist 캐시에 존재하지 않는 항목이면 캐시에 저장하기**
 
      Cache::add('key', 'value', $minutes);
+
+The `add` method will return `true` if the item is actually **added** to the cache. `add` 메소드는 항목이 실제로 캐시에 **추가** 된 경우에만 true 를 반환합니다. Otherwise, the method will return `false`. 그렇지 않으면 `false` 를 반환합니다.
 
 **Checking For Existence In Cache 캐시에 존재하는지 확인하기**
 
@@ -31,17 +39,17 @@ The cache configuration file also contains various other options, which are docu
           //
      }
 
-**Retrieving An Item From The Cache 캐시에서 하나의 항목을 찾기**
+#### Retrieving An Item From The Cache 캐시에서 하나의 항목을 찾기
 
      $value = Cache::get('key');
 
-**Retrieving An Item Or Returning A Default Value 찾는 항목이 없으면 기본값을 반환하기**
+#### Retrieving An Item Or Returning A Default Value 찾는 항목이 없으면 기본값을 반환하기
 
      $value = Cache::get('key', 'default');
 
      $value = Cache::get('key', function() { return 'default'; });
 
-**Storing An Item In The Cache Permanently 캐시에 영구적으로 저장하기**
+#### Storing An Item In The Cache Permanently 캐시에 영구적으로 저장하기
 
      Cache::forever('key', 'value');
 
@@ -70,13 +78,13 @@ Note that all items stored in the cache are serialized, so you are free to store
 
 All drivers except `file` and `database` support the `increment` and `decrement` operations: `file`과 `database`를 제외한 드라이버는 `increment` 및 `decrement` 조작을 지원하고 있습니다.
 
-**Incrementing A Value 값 증가시키기**
+#### Incrementing A Value 값 증가시키기
 
      Cache::increment('key');
 
      Cache::increment('key', $amount);
 
-**Decrementing A Value 값 감소시키기**
+#### Decrementing A Value 값 감소시키기
 
      Cache::decrement('key');
 
@@ -99,26 +107,26 @@ You may store a tagged cache by passing in an ordered list of tag names as argum
 
 You may use any cache storage method in combination with tags, including `remember`, `forever`, and `rememberForever`. You may also access cached items from the tagged cache, as well as use the other cache methods such as `increment` and `decrement`. `remember` , `forever` , `rememberForever` 및 이들의 을 포함한 모든 캐시 저장 방법 및 태그를 조합하여 사용할 수 있습니다. 또한 increment 및 decrement 같은 다른 캐시 메소드도 마찬가지로 태그를 캐시 항목에 액세스 할 수 있습니다.
 
-#### Accessing Items In A Tagged Cache
+#### Accessing Items In A Tagged Cache 태그된 캐시에 있는 아이템에 접근하기
 
-To access a tagged cache, pass the same ordered list of tags used to save it.
+To access a tagged cache, pass the same ordered list of tags used to save it. 태그가 지정된 캐쉬에 액세스하려면 저장된 것과 동일한 순서로 태그의 목록을 전달합니다.
 
 	$anne = Cache::tags('people', 'artists')->get('Anne');
 
 	$john = Cache::tags(array('people', 'authors'))->get('John');
 
-You may flush all items tagged with a name or list of names. For example, this statement would remove all caches tagged with either `people`, `authors`, or both. So, both "Anne" and "John" would be removed from the cache:
+You may flush all items tagged with a name or list of names. For example, this statement would remove all caches tagged with either `people`, `authors`, or both. So, both "Anne" and "John" would be removed from the cache: 이름 또는 이름의 목록을 지정하고 태그 된 항목을 모두 지울 수 있습니다. 예를 들어 다음 코드는 `people` 또는 `authors` 또는 둘 모두에 태그 된 모든 캐시 된 항목이 삭제됩니다. 그러므로 "Anne"과 "John"두 아이템은 캐시에서 제거됩니다:
 
 	Cache::tags('people', 'authors')->flush();
 
-In contrast, this statement would remove only caches tagged with `authors`, so "John" would be removed, but not "Anne".
+In contrast, this statement would remove only caches tagged with `authors`, so "John" would be removed, but not "Anne". 한편, 다음 코드에서는 `authors` 태그 된 캐시 만 삭제되기 때문에 "John"은 삭제되지만 "Anne"는 남아 있습니다.
 
 	Cache::tags('authors')->flush();
 
 <a name="database-cache"></a>
-## Database Cache
+## Database Cache 데이터베이스 캐시
 
-When using the `database` cache driver, you will need to setup a table to contain the cache items. You'll find an example `Schema` declaration for the table below:
+When using the `database` cache driver, you will need to setup a table to contain the cache items. You'll find an example `Schema` declaration for the table below: `database` 캐시 드라이버를 사용하는 경우 캐시 항목을 저장할 테이블을 준비해야합니다. 아래에서 테이블을 만드는 `Schema` 의 예를 확인 할 수 있습니다.
 
 	Schema::create('cache', function($table)
 	{
