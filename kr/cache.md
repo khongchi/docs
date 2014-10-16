@@ -26,13 +26,13 @@ The cache configuration file also contains various other options, which are docu
 
 	Cache::put('key', 'value', $expiresAt);
 
-**Storing An Item In The Cache If It Doesn't Exist 캐시에 존재하지 않는 항목이면 캐시에 저장하기**
+#### Storing An Item In The Cache If It Doesn't Exist 캐시에 존재하지 않는 항목이면 캐시에 저장하기
 
      Cache::add('key', 'value', $minutes);
 
 The `add` method will return `true` if the item is actually **added** to the cache. `add` 메소드는 항목이 실제로 캐시에 **추가** 된 경우에만 true 를 반환합니다. Otherwise, the method will return `false`. 그렇지 않으면 `false` 를 반환합니다.
 
-**Checking For Existence In Cache 캐시에 존재하는지 확인하기**
+#### Checking For Existence In Cache 캐시에 존재하는지 확인하기
 
      if (Cache::has('key'))
      {
@@ -69,7 +69,7 @@ You may also combine the `remember` and `forever` methods: `remember`와 `foreve
 
 Note that all items stored in the cache are serialized, so you are free to store any type of data. 캐시에 저장되는 모든 항목들은 직렬화되고, 따라서 어떤 유형의 데이터도 자유롭게 저장할 수 있습니다.
 
-**Removing An Item From The Cache 캐시에서 항목 삭제**
+#### Removing An Item From The Cache 캐시에서 항목 삭제
 
      Cache::forget('key');
 
@@ -134,3 +134,4 @@ When using the `database` cache driver, you will need to setup a table to contai
 		$table->text('value');
 		$table->integer('expiration');
 	});
+	
