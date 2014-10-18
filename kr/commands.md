@@ -143,6 +143,4 @@ If you need to register commands from within a service provider, you should call
 
 Sometimes you may wish to call other commands from your command. You may do so using the `call` method: 당신의 커맨드에서 다른 커맨드를 호출하고자 할 때가 있습니다. `call` 메소드를 사용해서 호출할 수 있습니다.
 
-**Calling Another Command 다른 커맨드 호출하기**
-
 	$this->call('command:name', array('argument' => 'foo', '--option' => 'bar'));
