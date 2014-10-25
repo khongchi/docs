@@ -12,7 +12,7 @@
 By default, error detail is enabled for your application. This means that when an error occurs you will be shown an error page with a detailed stack trace and error message. You may turn off error details by setting the `debug` option in your `app/config/app.php` file to `false`. **It is strongly recommended that you turn off error detail in a production environment.** 기본적으로 응용 프로그램 오류 정보를 출력하도록 설정되어 있습니다. 이것은 오류 발생시 오류 페이지에서 스택 추적과 오류 메시지를 표시하는 것입니다. 에러 상세를 보지 않으려면 `app/config/app.php` 의 `debug` 옵션을 `false` 로 설정하십시오. **특히 실제 운영 환경에서는 에러 상세 표시를 해제하기를 강력히 권합니다.**
 
 <a name="handling-errors"></a>
-## Handling Errors 에러 처
+## Handling Errors 에러 처리
 
 By default, the `app/start/global.php` file contains an error handler for all exceptions: 기본적으로 `app/start/global.php` 파일에서 모든 예외 처리를 행하고 있습니다:
 
@@ -62,7 +62,7 @@ In order to raise a 401 Unauthorized exception, just do the following: 401 인�
 These exceptions can be executed at any time during the request's lifecycle. 이러한 예외들은 요청의 수명주기 중 언제든지 발생시킬 수 있습니다.
 
 <a name="handling-404-errors"></a>
-## Handling 404 Errors 404 에러 처
+## Handling 404 Errors 404 에러 처리
 
 You may register an error handler that handles all "404 Not Found" errors in your application, allowing you to return custom 404 error pages: 응용 프로그램에서 모든 "404 찾을 수 없음" 에러를 처리하기 위해 사용자 지정 404 페이지를 반환하는 핸들러를 등록 할 수 있습니다.
 
@@ -94,7 +94,7 @@ Monolog has a variety of additional handlers you may use for logging. If needed,
 
 You may also register an event to catch all messages passed to the log: 로그에 전달되는 모든 메시지를 잡기 위해 이벤트를 등록 할 수 있습니다.
 
-**Registering A Log Listener 로그 리스너 등록하**
+**Registering A Log Listener 로그 리스너 등록하기**
 
 	Log::listen(function($level, $message, $context)
 	{
