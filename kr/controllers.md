@@ -1,19 +1,20 @@
-# Controllers
+# Controllers 컨트롤러
 
-- [Basic Controllers](#basic-controllers)
-- [Controller Filters](#controller-filters)
-- [RESTful Controllers](#restful-controllers)
-- [Resource Controllers](#resource-controllers)
-- [Handling Missing Methods](#handling-missing-methods)
+- [Basic Controllers 기본 컨트롤러](#basic-controllers)
+- [Controller Filters 컨트롤러 필터](#controller-filters)
+- [RESTful Controllers RESTful 컨트롤러](#restful-controllers)
+- [Resource Controllers 리소스 컨트롤러](#resource-controllers)
+- [Handling Missing Methods 찾을 수 없는 메소드 처리](#handling-missing-methods)
 
 <a name="basic-controllers"></a>
-## Basic Controllers
+## Basic Controllers 기본 컨트롤러
 
-Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc).
+Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. 모든 라우팅 로직을 하나의 `routes.php` 파일에 정의하기 보다는 컨트롤러 클래스를 통해서 조직화 하기를 원할 수 있습니다. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc). 컨트롤러는 연관있는 라우팅 로직을 클래스에 정리하여 그룹핑하는 동시에 자동 [의존성 주입](/docs/ioc)등 프레임 워크의 고급 기능을 사용하는 이점이 있습니다.
 
-Controllers are typically stored in the `app/controllers` directory, and this directory is registered in the `classmap` option of your `composer.json` file by default.
+Controllers are typically stored in the `app/controllers` directory, and this directory is registered in the `classmap` option of your `composer.json` file by default. 컨트롤러는 일반적으로 `app/controllers` 디렉토리에 위치 시키며, 이 디렉토리는 기본적으로 `composer.json` 파일의`classmap` 옵션에 등록되어 있습니다.
 
 Here is an example of a basic controller class:
+기본적인 컨트롤러 클래스의 예제 입니다: 
 
 	class UserController extends BaseController {
 
@@ -29,36 +30,38 @@ Here is an example of a basic controller class:
 
 	}
 
-All controllers should extend the `BaseController` class. The `BaseController` is also stored in the `app/controllers` directory, and may be used as a place to put shared controller logic. The `BaseController` extends the framework's `Controller` class. Now, We can route to this controller action like so:
+All controllers should extend the `BaseController` class. 모든 컨트롤러들은 `BaseController` 클래스를 상속해야 합니다. The `BaseController` is also stored in the `app/controllers` directory, and may be used as a place to put shared controller logic. `BaseController` 또한 `app/controllers` 디렉토리에 있으며, 모든 컨트롤러 에서 공유하고자 하는 로직을 추가하는 데도 사용할 수 있습니다. The `BaseController` extends the framework's `Controller` class. `BaseController` 는 프레임워크의 `Controller` 클래스를 상속 받고 있습니다. Now, We can route to this controller action like so: 이 컨트롤러를 사용해서 다음과 같이 라우팅 경로를 지정할 수 있습니다:
 
 	Route::get('user/{id}', 'UserController@showProfile');
 
-If you choose to nest or organize your controller using PHP namespaces, simply use the fully qualified class name when defining the route:
+If you choose to nest or organize your controller using PHP namespaces, simply use the fully qualified class name when defining the route: 만약 컨트롤러가 자체적인 네임스페이스를 사용하고 있다면 다음과 같이 전체 네임스페이스를 포함한 전체 경로를 사용하면 됩니다.
 
 	Route::get('foo', 'Namespace\FooController@method');
 
 You may also specify names on controller routes:
+또한 컨트롤러의 라우팅에 이름을 부여할 수도 있습니다.
 
 	Route::get('foo', array('uses' => 'FooController@method',
 											'as' => 'name'));
 
-To generate a URL to a controller action, you may use the `URL::action` method:
+To generate a URL to a controller action, you may use the `URL::action` method: 컨트롤러의 액션에 해당하는 URL 생성하려면 `URL::action` 메소드를 사용합니다: 
 
 	$url = URL::action('FooController@method');
 
-You may access the name of the controller action being run using the `currentRouteAction` method:
+You may access the name of the controller action being run using the `currentRouteAction` method: 현재 실행중인 컨트롤러 액션의 이름을 얻고자 한다면 `currentRouteAction` 메소드를 사용하면 됩니다:
 
 	$action = Route::currentRouteAction();
 
 <a name="controller-filters"></a>
-## Controller Filters
+## Controller Filters 컨트롤러 필터
 
-[Filters](/docs/routing#route-filters) may be specified on controller routes similar to "regular" routes:
+[Filters](/docs/routing#route-filters) may be specified on controller routes similar to "regular" routes: 컨트롤러 라우트에 "일반적인" 라우팅과 같이 [필터](/docs/routing#route-filters)를 지정할 수 있습니다:
 
 	Route::get('profile', array('before' => 'auth',
 				'uses' => 'UserController@showProfile'));
 
 However, you may also specify filters from within your controller:
+그리고, 컨트롤러 내부에 필터를 지정할 수도 있습니다.
 
 	class UserController extends BaseController {
 
@@ -78,6 +81,7 @@ However, you may also specify filters from within your controller:
 	}
 
 You may also specify controller filters inline using a Closure:
+클로저를 사용해 인라인 컨트롤러 필터를 지정할 수도 있습니다. 
 
 	class UserController extends BaseController {
 
@@ -95,15 +99,16 @@ You may also specify controller filters inline using a Closure:
 	}
 
 <a name="restful-controllers"></a>
-## RESTful Controllers
+## RESTful Controllers RESTful 컨트롤러
 
-Laravel allows you to easily define a single route to handle every action in a controller using simple, REST naming conventions. First, define the route using the `Route::controller` method:
+Laravel allows you to easily define a single route to handle every action in a controller using simple, REST naming conventions. 라라벨에서는 REST풀한 라우팅 룰을 처리하는 컨트롤러 액션을 정의하기 위한 손쉬운 방법을 제공합니다. First, define the route using the `Route::controller` method:
+먼저 `Route::controller` 메소드를 사용하여 경로를 지정합니다.
 
-**Defining A RESTful Controller**
+**Defining A RESTful Controller REST풀 컨트롤러 정의하기 **
 
 	Route::controller('users', 'UserController');
 
-The `controller` method accepts two arguments. The first is the base URI the controller handles, while the second is the class name of the controller. Next, just add methods to your controller, prefixed with the HTTP verb they respond to:
+The `controller` method accepts two arguments. `controller` 메소드는 두개의 인자를 넘겨 받도록 되어 있습니다. The first is the base URI the controller handles, while the second is the class name of the controller. 첫번째 인자는 컨트롤러로 제어할 URI이고, 두번째는 컨트롤러의 클래스명을 의미합니다. Next, just add methods to your controller, prefixed with the HTTP verb they respond to: 이어서 해당하는 HTTP 메소드 이름을 접두어로 (get, post..) 사용하는 형태로 컨트롤러의 메소드를 추가합니다: 
 
 	class UserController extends BaseController {
 
