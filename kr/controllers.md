@@ -9,7 +9,7 @@
 <a name="basic-controllers"></a>
 ## Basic Controllers 기본 컨트롤러
 
-Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. 모든 라우팅 로직을 하나의 `routes.php` 파일에 정의하기 보다는 컨트롤러 클래스를 통해서 조직화 하기를 원할 수 있습니다. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc). 컨트롤러는 연관있는 라우팅 로직을 클래스에 정리하여 그룹핑하는 동시에 자동 [의존성 주입](/docs/ioc)등 프레임 워크의 고급 기능을 사용하는 이점이 있습니다.
+Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. 모든 라우팅 로직을 하나의 `routes.php` 파일에 정의하는 대신 컨트롤러 클래스를 통해서 구성할 수도 있습니다. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc). 컨트롤러는 관련있는 라우팅 로직을 클래스에 정리하여 그룹핑하는 동시에 자동 [의존성 주입](/docs/ioc)등 프레임 워크의 고급 기능을 사용하는 이점이 있습니다.
 
 Controllers are typically stored in the `app/controllers` directory, and this directory is registered in the `classmap` option of your `composer.json` file by default. 컨트롤러는 일반적으로 `app/controllers` 디렉토리에 위치 시키며, 이 디렉토리는 기본적으로 `composer.json` 파일의`classmap` 옵션에 등록되어 있습니다.
 
@@ -124,28 +124,31 @@ The `controller` method accepts two arguments. `controller` 메소드는 두개�
 
 	}
 
-The `index` methods will respond to the root URI handled by the controller, which, in this case, is `users`.
+The `index` methods will respond to the root URI handled by the controller, which, in this case, is `users`. 위의 경우에 컨트롤러의 `index` 메소드는 `users` URI에 대한 루트 주소에 대한 결과를 반환합니다. 
 
-If your controller action contains multiple words, you may access the action using "dash" syntax in the URI. For example, the following controller action on our `UserController` would respond to the `users/admin-profile` URI:
+If your controller action contains multiple words, you may access the action using "dash" syntax in the URI. 만약 컨트롤러의 메소드가 여러개의 단어로 구성되어 진 형태라면 “-“을 통해서 접속할 수 있는 URI를 제공하게 됩니다. For example, the following controller action on our `UserController` would respond to the `users/admin-profile` URI: 예를들어 `UserController`에 다음과 같은 액션이 정의되었다면 URI는 `users/admin-profile` 과 같이 구성됩니다. 
 
 	public function getAdminProfile() {}
 
 <a name="resource-controllers"></a>
-## Resource Controllers
+## Resource Controllers 리소스 컨트롤러
 
-Resource controllers make it easier to build RESTful controllers around resources. For example, you may wish to create a controller that manages "photos" stored by your application. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller.
+Resource controllers make it easier to build RESTful controllers around resources. 리소스 컨트롤러는 리소스에 대한 RESTful 컨트롤러를 손쉽게 구성할 수 있게 해줍니다. For example, you may wish to create a controller that manages "photos" stored by your application. 예를 들어 여러분은 어플리케이션에서 “photos” 를 관리하는 컨트롤러를 생성할 수 있습ㄴ디ㅏ. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller. `controller:make` Artisan 커맨드라인 명령어와 `Route::resource` 메소드를 사용하면 손쉽게 컨트롤러를 생성할 수 있습니다. 
 
 To create the controller via the command line, execute the following command:
+커맨드라인에서 컨트롤러를 생성하기 위한 명령어는 다음과 같습니다. : 
 
 	php artisan controller:make PhotoController
 
 Now we can register a resourceful route to the controller:
+이제 생성된 컨트롤러에 리소스풀 라우트를 등록하면 됩니다. 
 
 	Route::resource('photo', 'PhotoController');
 
-This single route declaration creates multiple routes to handle a variety of RESTful actions on the photo resource. Likewise, the generated controller will already have stubbed methods for each of these actions with notes informing you which URIs and verbs they handle.
+This single route declaration creates multiple routes to handle a variety of RESTful actions on the photo resource. 한번의 선언만으로 photo 를 구성하는 RESTful 한 액션에 대한 다양한 라우트를 설정할 수 있습니다. Likewise, the generated controller will already have stubbed methods for each of these actions with notes informing you which URIs and verbs they handle. 직접 구성한것과 마찬가지로, 생성 된 컨트롤러는 이미의 URI와 동사가 처리를 알려주는 메모와 함께 각각의 액션에 대한 방법을 구성 것입니다.
 
 **Actions Handled By Resource Controller**
+**리소스풀 컨트롤러에 의해서 구성된 액션들**
 
 Verb      | Path                        | Action       | Route Name
 ----------|-----------------------------|--------------|---------------------
@@ -158,12 +161,14 @@ PUT/PATCH | /resource/{resource}        | update       | resource.update
 DELETE    | /resource/{resource}        | destroy      | resource.destroy
 
 Sometimes you may only need to handle a subset of the resource actions:
+어쩌면 몇개의 액션만 필요할 수도 있습니다. 
 
 	php artisan controller:make PhotoController --only=index,show
 
 	php artisan controller:make PhotoController --except=index
 
 And, you may also specify a subset of actions to handle on the route:
+그리고 마찬가지로 몇개의 액션만 라우트에 등록할 수도 있습니다. 
 
 	Route::resource('photo', 'PhotoController',
 					array('only' => array('index', 'show')));
@@ -172,11 +177,12 @@ And, you may also specify a subset of actions to handle on the route:
 					array('except' => array('create', 'store', 'update', 'delete')));
 
 <a name="handling-missing-methods"></a>
-## Handling Missing Methods
+## Handling Missing Methods 누락된 메소드의 처리 방법 
 
-A catch-all method may be defined which will be called when no other matching method is found on a given controller. The method should be named `missingMethod`, and receives the parameter array for the request as its only argument:
+A catch-all method may be defined which will be called when no other matching method is found on a given controller. 컨트롤러에서 일치하는 메소드를 찾을 수 없는 경우에 호출되는 메소드가 존재합니다.  The method should be named `missingMethod`, and receives the parameter array for the request as its only argument: `missingMethod`라고 불리는 이 메소드는 요청에 대한 파라미터가 있는 경우 이를 배열의 형태로 넘겨 받습니다. 
 
-**Defining A Catch-All Method**
+**Defining A Catch-All Method 메소드 정의 방법**
+
 
 	public function missingMethod($parameters)
 	{
