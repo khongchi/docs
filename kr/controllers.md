@@ -133,7 +133,7 @@ If your controller action contains multiple words, you may access the action usi
 <a name="resource-controllers"></a>
 ## Resource Controllers 리소스 컨트롤러
 
-Resource controllers make it easier to build RESTful controllers around resources. 리소스 컨트롤러는 리소스에 대한 RESTful 컨트롤러를 손쉽게 구성할 수 있게 해줍니다. For example, you may wish to create a controller that manages "photos" stored by your application. 예를 들어 여러분은 어플리케이션에서 “photos” 를 관리하는 컨트롤러를 생성할 수 있습ㄴ디ㅏ. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller. `controller:make` Artisan 커맨드라인 명령어와 `Route::resource` 메소드를 사용하면 손쉽게 컨트롤러를 생성할 수 있습니다. 
+Resource controllers make it easier to build RESTful controllers around resources. 리소스 컨트롤러는 리소스에 대한 RESTful 컨트롤러를 손쉽게 구성할 수 있게 해줍니다. For example, you may wish to create a controller that manages "photos" stored by your application. 예를 들어 여러분은 어플리케이션에서 “photos” 를 관리하는 컨트롤러를 생성할 수 있습니다. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller. `controller:make` Artisan 커맨드라인 명령어와 `Route::resource` 메소드를 사용하면 손쉽게 컨트롤러를 생성할 수 있습니다. 
 
 To create the controller via the command line, execute the following command:
 커맨드라인에서 컨트롤러를 생성하기 위한 명령어는 다음과 같습니다. : 
@@ -177,7 +177,7 @@ And, you may also specify a subset of actions to handle on the route:
 					array('except' => array('create', 'store', 'update', 'delete')));
 
 <a name="handling-missing-methods"></a>
-## Handling Missing Methods 누락된 메소드의 처리 방법 
+## Handling Missing Methods 찾을 수 없는 메소드의 처리
 
 A catch-all method may be defined which will be called when no other matching method is found on a given controller. 컨트롤러에서 일치하는 메소드를 찾을 수 없는 경우에 호출되는 메소드가 존재합니다.  The method should be named `missingMethod`, and receives the parameter array for the request as its only argument: `missingMethod`라고 불리는 이 메소드는 요청에 대한 파라미터가 있는 경우 이를 배열의 형태로 넘겨 받습니다. 
 
