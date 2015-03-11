@@ -1,32 +1,32 @@
-# Contribution Guide
+# Contribution Guide 기여 가이드
 
-- [Introduction](#introduction)
-- [Core Development Discussion](#core-development-discussion)
-- [New Features](#new-features)
-- [Bugs](#bugs)
-- [Creating Liferaft Applications](#creating-liferaft-applications)
-- [Grabbing Liferaft Applications](#grabbing-liferaft-applications)
-- [Which Branch?](#which-branch)
-- [Security Vulnerabilities](#security-vulnerabilities)
-- [Coding Style](#coding-style)
+- [Introduction 소개](#introduction)
+- [Core Development Discussion 핵심 개발 논의](#core-development-discussion)
+- [New Features 새로운 기능](#new-features)
+- [Bugs 버그](#bugs)
+- [Creating Liferaft Applications Liferaft 어플리케이션 생성](#creating-liferaft-applications)
+- [Grabbing Liferaft ApplicationsLiferaft 어플리케이션 잡기???](#grabbing-liferaft-applications)
+- [Which Branch? 브랜치 선택](#which-branch)
+- [Security Vulnerabilities 보안 취약점](#security-vulnerabilities)
+- [Coding Style 코딩 스타일](#coding-style)
 
 <a name="introduction"></a>
-## Introduction
+## Introduction 소개
 
-Laravel is an open-source project and anyone may contribute to Laravel for its improvement. We welcome contributors, regardless of skill level, gender, race, religion, or nationality. Having a diverse, vibrant community is one of the core values of the framework!
+Laravel is an open-source project and anyone may contribute to Laravel for its improvement. 라라벨은 오픈소스 프로젝트로 누구나 라라벨의 향상에 기여할 수 있습니다. We welcome contributors, regardless of skill level, gender, race, religion, or nationality. 우리는 기술 수준과 성별, 인종, 종교, 국적에 관곙없이 참여자을 환영합니다. Having a diverse, vibrant community is one of the core values of the framework! 다양하고 활발한 커뮤니티를 갖는 것은 프레임 워크의 핵심 가치 중 하나입니다!
 
-To encourage active collaboration, Laravel currently only accepts pull requests, not bug reports. "Bug reports" may be sent in the form of a pull request containing a failing unit test. Alternatively, a demonstration of the bug within a sandbox Laravel application may be sent as a pull request to the [main Laravel repository](https://github.com/laravel/laravel). A failing unit test or sandbox application provides the development team "proof" that the bug exists, and, after the development team addresses the bug, serves as a reliable indicator that the bug remains fixed.
+To encourage active collaboration, Laravel currently only accepts pull requests, not bug reports. 활발한 협력을 장려하기 위해, 라라벨은 현재 PR만 허용하고 버그 리포트를 받지 않습니다. "Bug reports" may be sent in the form of a pull request containing a failing unit test. "버그 리포트"는 실패한 단위 테스트를 포함한 PR로 보내져야 합니다. Alternatively, a demonstration of the bug within a sandbox Laravel application may be sent as a pull request to the [main Laravel repository](https://github.com/laravel/laravel). A failing unit test or sandbox application provides the development team "proof" that the bug exists, and, after the development team addresses the bug, serves as a reliable indicator that the bug remains fixed.
 
 The Laravel source code is managed on Github, and there are repositories for each of the Laravel projects:
 
-- [Laravel Framework](https://github.com/laravel/framework)
-- [Laravel Application](https://github.com/laravel/laravel)
-- [Laravel Documentation](https://github.com/laravel/docs)
-- [Laravel Cashier](https://github.com/laravel/cashier)
-- [Laravel Envoy](https://github.com/laravel/envoy)
-- [Laravel Homestead](https://github.com/laravel/homestead)
-- [Laravel Homestead Build Scripts](https://github.com/laravel/settler)
-- [Laravel Website](https://github.com/laravel/website)
+- [Laravel Framework 라라벨 프레임워크](https://github.com/laravel/framework) 
+- [Laravel Application 라라벨 어플리케이션](https://github.com/laravel/laravel)
+- [Laravel Documentation 라라벨 메뉴얼](https://github.com/laravel/docs)
+- [Laravel Cashier 라라벨 캐셔](https://github.com/laravel/cashier)
+- [Laravel Envoy 라라벨 Envoy](https://github.com/laravel/envoy)
+- [Laravel Homestead 라라벨 Homestead](https://github.com/laravel/homestead)
+- [Laravel Homestead Build Scripts 라라벨 Homestead 빌드 스크립트](https://github.com/laravel/settler)
+- [Laravel Website 라라벨 웹사이트](https://github.com/laravel/website)
 - [Laravel Art](https://github.com/laravel/art)
 
 <a name="core-development-discussion"></a>
@@ -123,9 +123,9 @@ Have an extra hour and want to solve a random issue? Just run `grab` without a p
 	liferaft grab
 
 <a name="which-branch"></a>
-## Which Branch?
+## Which Branch? 브랜치 선택?
 
-> **Note:** This section primarly applies to those sending pull requests to the [laravel/framework](https://github.com/laravel/framework) repository, not Liferaft applications.
+> **Note주의:** This section primarly applies to those sending pull requests to the [laravel/framework](https://github.com/laravel/framework) repository, not Liferaft applications.
 
 **All** bug fixes should be sent to the latest stable branch. Bug fixes should **never** be sent to the `master` branch unless they fix features that exist only in the upcoming release.
 
@@ -136,16 +136,20 @@ Have an extra hour and want to solve a random issue? Just run `grab` without a p
 If you are unsure if your feature qualifies as a major or minor, please ask Taylor Otwell in the `#laravel-dev` IRC channel (Freenode).
 
 <a name="security-vulnerabilities"></a>
-## Security Vulnerabilities
+## Security Vulnerabilities 보안 취약점
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at <a href="mailto:taylorotwell@gmail.com">taylorotwell@gmail.com</a>. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at <a href="mailto:taylorotwell@gmail.com">taylorotwell@gmail.com</a>. 만약 라라벨에서 보안 취약점을 발견했다면 테일러 오트웰 <a href="mailto:taylorotwell@gmail.com">taylorotwell@gmail.com</a>에게 이메일을 보내주시길 바랍니다. All security vulnerabilities will be promptly addressed. 모든 보안 취약점은 신속하게 해결될 것입니다. 
 
 <a name="coding-style"></a>
-## Coding Style
+## Coding Style 코딩 스타일
 
-Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. In addition to these standards, the following coding standards should be followed:
+Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. 라라벨은 [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) 와 [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) 코딩 표준을 따르고 있습니다. In addition to these standards, the following coding standards should be followed: 이러한 기준에 더하여, 다음과 같은 코딩 표준을 따라야 합니다. 
 
 - The class namespace declaration must be on the same line as `<?php`.
+- 클래스 네임스페이스는 반드시 `<?php`와 같은 라인에 있어야 합니다. 
 - A class' opening `{` must be on the same line as the class name.
+- 클래스를 여는 `{`는 반드시 클래스 이름과 같은 라인에 있어야 합니다. 
 - Functions and control structures must use Allman style braces.
+- 함수와 컨트롤 구조에서는 반드시 Allman 방식의 괄호를 구성합니다. 
 - Indent with tabs, align with spaces.
+- 인덴트는 탭으로, 정렬은 스페이스로 구성합니다. 
