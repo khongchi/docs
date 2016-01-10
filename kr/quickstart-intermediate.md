@@ -16,7 +16,7 @@
 - [할일 추가하기](#adding-tasks)
 	- [입력값 유효성 검증하기](#validation)
 	- [할일 생성하기](#creating-the-task)
-- [존재하는 할일들 표시하기](#displaying-existing-tasks)
+- [추가된 할일들 표시하기](#displaying-existing-tasks)
 	- [의존성 주입](#dependency-injection)
 	- [할일들 보여주기](#displaying-the-tasks)
 - [할일 삭제하기](#deleting-tasks)
@@ -490,7 +490,7 @@ form의 입력값 검증 오류를 뷰 안에서 표현하기 위해 `@include('
 좋습니다. 이제 성공적으로 할일를 생성할 수 있습니다. 다음으로, 존재하는 모든 할일 목록을 뷰에 계속 추가하도록 하겠습니다.
 
 <a name="displaying-existing-tasks"></a>
-## 존재하는 할일들 표시하기
+## 추가된 할일들 표시하기
 
 먼저 모든 할일들을 뷰에 전달하기 위해서 `TaskController@index` 메소드를 수정해야 합니다. `view` 함수는 두번째 인자로 뷰에서 사용되어질 데이터의 배열을 전달 받고,  배열의 각 키는 뷰에서 변수가 될것입니다. 예를 들어 다음처럼 할 수 있습니다: 
 
