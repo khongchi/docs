@@ -535,7 +535,7 @@ form이 `file` input 타입을 포함하고 있다면, `attach` 메소드를 이
         }
     }
 
-> **주의:** 이 메소드는 `DispatchesJobs` 트레이트-trait의 dispatch 메소들을 통해 job 이 보내졌는지만을 감지합니다. `Queue::push`로 바로 보내진 job은 감지하지 못합니다. 
+> **주의:** 이 메소드는 `DispatchesJobs` 트레이트-trait의 dispatch 메소드를 통해 job 이 보내졌는지만을 감지합니다. `Queue::push`로 바로 보내진 job은 감지하지 못합니다. 
 
 <a name="mocking-facades"></a>
 ### 파사드 Mocking
